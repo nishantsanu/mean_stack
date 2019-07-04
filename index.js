@@ -1,0 +1,15 @@
+const express=require('express');
+const app=express();
+const port=8000;
+
+app.listen(port,function(err){
+    if(err){
+        // console.log('error entering port,Error:',err);
+        //by interpolation-i.e variable inside string
+        console.log(`error entering port,Error:${err}`);
+        return;
+    }
+
+    console.log('server is running on port: ', port);
+
+})
