@@ -1,0 +1,25 @@
+<!-- made for taking common layout -->
+
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+        <link rel="stylesheet" href="/css/layout.css">
+        <!-- forward / will take the root directory of static defined in inded.js -->
+        <!-- for style -->
+        <%- style %>
+    </head>
+
+    <body>
+
+        <%- include('_header');%>
+        <!-- remove variable part and leave only common parts -->
+        <!-- <h1>This is <%= title %> </h1> -->
+        <%- body %>
+
+        <%- include('_footer');%>
+
+        <%- script %>
+    </body>
+</html>
