@@ -12,6 +12,7 @@ router.get('/signup',usersController.signup);
 
 router.post('/create',usersController.create);
 
+router.post('/createSession',usersController.createSession);
 
 //another further routers from here
 //router.use('/routeName',require('./routeFile'));

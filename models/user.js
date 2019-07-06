@@ -24,7 +24,7 @@ const User= mongoose.model('User',userSchema);
 module.exports=User;
 
 const signinSchema= new mongoose.Schema({
-    username:{
+    email:{
         type:String,
         required:true
     },
