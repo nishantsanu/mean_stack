@@ -1,11 +1,15 @@
 const express=require('express');
 const app=express();
 const port=8000;
+const cookieParser= require('cookie-parser');
 //import express layout after installing
 const expressLayouts=require('express-ejs-layouts');
 
 //require database
 const db= require('./config/mongoose');
+
+app.use(express.urlencoded());
+app.use(cookieParser());
 
 //using static
 app.use(express.static('./assets/'));
