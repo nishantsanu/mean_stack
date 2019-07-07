@@ -76,3 +76,8 @@ module.exports.createSession=function(req,res){
 
 
 }
+//signout action
+module.exports.signout=function(req,res){
+    res.cookie('user_id','');
+    return res.redirect('/users/signin');
+}

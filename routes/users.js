@@ -14,6 +14,7 @@ router.post('/create',usersController.create);
 
 router.post('/createSession',usersController.createSession);
 
+router.get('/signout',usersController.signout);
 //another further routers from here
 //router.use('/routeName',require('./routeFile'));
 router.use('/profile/posts',require('./posts'));
