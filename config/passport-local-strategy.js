@@ -12,13 +12,13 @@ passport.use(new LocalStrategy({
                 console.log('Error in finding user --> Passport');
                 return done(err);
             }
-           console.log(user.password != password);
+           
             if(!user || user.password != password){
                 
                 console.log('Invalid Username/Password');
                 return done(null,false);
             }   
-            console.log('***** reached matching user', user);
+            // console.log('***** reached matching user', user);
 
               return done(null,user);
              });
@@ -42,5 +42,25 @@ passport.deserializeUser(function(id,done){
         return done(null,user);
     });
 })
+
+//check if user is authenticated
+
+passport.checkAuthentication=function(req,res,next){
+    //if user is signed in then pass it to next step that is controller action
+    if(req.isAuthenticated()){
+        return next();
+    }
+    //if user is not signed in
+    return res.redirect('/users/signin');
+
+}
+
+passport.setAuthenticatedUser= function(req,res,next){
+    if(req.isAuthenticated()){
+        //req.user contains the current sign in cookie we are just sending it to locals for the views
+        res.locals.user=req.user;
+    }
+    next();
+}
 
 module.exports=passport;

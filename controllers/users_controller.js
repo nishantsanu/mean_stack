@@ -10,12 +10,19 @@ module.exports.profile=function(req,res){
 
 //render the signin page
 module.exports.signin=function(req,res){
+    if(req.isAuthenticated()){
+       return res.redirect('/users/profile');
+    }
     return res.render('user_signin',{
         title:'Codeial | Signin'
     });
 }
 //render the signup page
 module.exports.signup=function(req,res){
+      if(req.isAuthenticated()){
+      return res.redirect('/users/profile');
+}
+
     return res.render('user_signup',{
         title:'Codeial | SignUp'
     });
