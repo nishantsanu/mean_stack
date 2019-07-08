@@ -7,6 +7,10 @@ const expressLayouts=require('express-ejs-layouts');
 
 //require database
 const db= require('./config/mongoose');
+//used for session cookie
+const session=require('express-session');
+const passport=require('passport');
+const passportLocal=require('./config/passport-local-strategy');
 
 app.use(express.urlencoded());
 app.use(cookieParser());
@@ -21,11 +25,27 @@ app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 
 
-//use express router
-app.use('/',require('./routes'));
+
 //view engine express setup
 app.set('view engine','ejs');
 app.set('views','./views');
+
+app.use(session({
+    name:'codeial',
+    //TODO change the secret before deployment to product mode
+    secret:'blahsomething',
+    saveUninitialized:false,
+    resave:false,
+    cookie:{
+        maxAge:(1000*60*100)
+    }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+//use express router
+app.use('/',require('./routes'));
 
 
 
