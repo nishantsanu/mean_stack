@@ -1,26 +1,94 @@
+<link rel="stylesheet" href="/css/_header.css">
 <header>
-        Page Header
+     
+        
 
-        <ul>
-         <% if(locals.user){%>
-                
-                <li>
-                       
-                        <a href="/users/profile"> <%=user.name %></a>
-                <li>
-                        <a href="/users/signout">Sign Out</a>
-                </li>
+	<nav class="navbar">
+		<a href="#">
+			<div id="logo" >
+				Codeial
+			</div>
+		</a>
 
-         <%  }else{ %>
-                <li>
-                        <a href="/users/signin">Sign In</a>
-                </li>
-                <li>
-                        <a href="/users/signup">Sign Up</a>
-                </li>
+		
+				<div class="search-box">
+					<form id="search-form" action="#">
+					<input type="text" name="search" placeholder="Use me to search" class="">
+					</form>
+				</div>
+				<div class="without-logo">
+				<ul class="navul">
+				<li>
+					<a href="/">Home</a>
+					
+                                </li>
+                                <% if(locals.user){ %>
+                                        <li>
+                                                <a href="/users/profile">
+                                                        <%= user.name %>
+                                                </a>
+                                        </li>
+                                        <li>
+                                                <a href="#">Activity</a>
+                                        </li>
+                                        <li>
+                                                <a href="#">Messages</a>
+                                        </li>
+                                        <li>
+                                                <a href="/users/signout">Sign Out</a>
+                                        </li>
+
+                                 <% }else{ %>
+                                        
+                                        
+                                        <li>
+                                                <a href="/users/profile">Profile </a>
+                                        </li>
+                                        <li>
+                                                <a href="/users/signin">Sign In</a>
+                                        </li>
+                                        <li>
+                                                <a href="/users/signup">Sign Up</a>
+                                        </li>
+                                        <li>
+                                                <a href="#">About Us</a>
+                                        </li>
 
 
-         <%  } %>
+                                 <% } %>
 
-        </ul>
+
+
+				
+				
+			</ul>
+		</div>
+
+	</nav>
+
 </header>
+
+<!-- Page Header
+
+<ul>
+ <% if(locals.user){%>
+        
+        <li>
+               
+                <a href="/users/profile"> <%=user.name %></a>
+        <li>
+                <a href="/users/signout">Sign Out</a>
+        </li>
+
+ <%  }else{ %>
+        <li>
+                <a href="/users/signin">Sign In</a>
+        </li>
+        <li>
+                <a href="/users/signup">Sign Up</a>
+        </li>
+
+
+ <%  } %>
+
+</ul> -->
