@@ -14,7 +14,6 @@ router.get('/signup',usersController.signup);
 
 router.post('/create',usersController.create);
 
-<<<<<<< HEAD
 //use passport as a middleware to authenticate
 router.post('/create-session',passport.authenticate(
     'local',
@@ -22,9 +21,9 @@ router.post('/create-session',passport.authenticate(
 ),usersController.createSession);
 
 router.get('/signout',usersController.destroySession);
-=======
-router.post('/createSession',usersController.createSession);
->>>>>>> origin
+
+// router.post('/createSession',usersController.createSession);
+// >>>>>>> origin
 
 //another further routers from here
 //router.use('/routeName',require('./routeFile'));
