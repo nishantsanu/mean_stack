@@ -3,9 +3,10 @@ const router=express.Router();
 const passport=require('passport');
 
 const usersController=require('../controllers/users_controller');
-// const postsController=require('../controllers/posts_controller');
 
-router.get('/profile',passport.checkAuthentication,usersController.profile);
+// router.use('/profile',require('./profile'));
+
+router.get('/profile/:id',passport.checkAuthentication,usersController.profile);
 //signin
 
 router.get('/signin',usersController.signin);
@@ -21,12 +22,6 @@ router.post('/create-session',passport.authenticate(
 ),usersController.createSession);
 
 router.get('/signout',usersController.destroySession);
-
-// router.post('/createSession',usersController.createSession);
-// >>>>>>> origin
-
-//another further routers from here
-//router.use('/routeName',require('./routeFile'));
 // router.use('/profile/posts',require('./posts'));
 
 module.exports=router;
