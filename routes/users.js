@@ -7,6 +7,11 @@ const usersController=require('../controllers/users_controller');
 // router.use('/profile',require('./profile'));
 
 router.get('/profile/:id',passport.checkAuthentication,usersController.profile);
+//update
+router.post('/update/:id',passport.checkAuthentication,usersController.update);
+
+
+
 //signin
 
 router.get('/signin',usersController.signin);
@@ -23,5 +28,6 @@ router.post('/create-session',passport.authenticate(
 
 router.get('/signout',usersController.destroySession);
 // router.use('/profile/posts',require('./posts'));
+
 
 module.exports=router;

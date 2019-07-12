@@ -1,6 +1,7 @@
 //require user from model
 const User=require('../models/user');
 
+//display profile of user
 module.exports.profile=function(req,res){
     User.findById(req.params.id,function(err,user){
         return res.render('user_profile',{
@@ -10,6 +11,20 @@ module.exports.profile=function(req,res){
     });
    
 }
+//update
+module.exports.update = function(req,res){
+    if(req.user.id== req.params.id){
+        User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+            return res.redirect('back');
+        });
+    }else{
+        return res.status(401).send('Unauthorized');
+    }
+}
+
+
+
+
 
 //render the signin page
 module.exports.signin=function(req,res){
