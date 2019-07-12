@@ -1,10 +1,10 @@
 body {
-  background-color: #ade2c0;
+  background-color: #8fd59f;
   text-align: center;
 }
 
 #wrap {
-  background-color: #ade2c0;
+  background-color: inherit;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }

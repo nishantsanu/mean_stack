@@ -1,3 +1,7 @@
+html {
+  background-color: #8fd59f;
+}
+
 body {
   margin: 0;
   font-family: Didot;
@@ -7,7 +11,7 @@ body .navbar {
   display: flex;
   height: 70px;
   width: 100vw;
-  background-color: #504d4d;
+  background-color: #3d3636d9;
 }
 
 input::placeholder {
