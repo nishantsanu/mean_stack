@@ -3,38 +3,55 @@ const Post= require('../models/post');
 const User = require('../models/user');
 
 
-module.exports.home=function(req,res){
-   // console.log(req.cookies);
-
-//     Post.find({},function(err,posts){
-//     if(err){
-//         console.log('error in fetching posts from db');
-//         return;
-//     }
-//     return res.render('home',{
-//         title:'Home',
-//         users_posts : posts
+// module.exports.home=function(req,res){
+   
+// //populate the user of each post
+//     Post.find({})
+//     .populate('user')
+//     .populate({
+//         path: 'comments',
+//         populate: {
+//             path: 'user'
+//         }
 //     })
-//    })
+//     .exec(function(err,posts){
 
-//populate the user of each post
-    Post.find({})
-    .populate('user')
-    .populate({
-        path: 'comments',
-        populate: {
-            path: 'user'
-        }
-    })
-    .exec(function(err,posts){
+//         User.find({},function(err,users){
+//             return res.render('home',{
+//                 title: "Codeial | Home",
+//                 posts: posts,
+//                 all_users:users
+//             });
+//         });
 
-        User.find({},function(err,users){
-            return res.render('home',{
-                title: "Codeial | Home",
-                posts: posts,
-                all_users:users
-            });
+//     })
+// }
+
+//ASYNC AWAIT
+module.exports.home=  async function(req,res){
+    //error handeling by try catch
+    try{
+        let posts= await Post.find({})
+        .populate('user')
+        .populate({
+            path: 'comments',
+            populate: {
+                path: 'user'
+            }
+        })
+        
+        let users= await User.find({});
+
+        return res.render('home',{
+            title: "Codeial | Home",
+            posts: posts,
+            all_users:users
         });
+    }catch(err){
+        console.log('Error',err);
+        return;
+    }
 
-    })
-}
+       
+        
+    }

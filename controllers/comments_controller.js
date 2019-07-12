@@ -2,43 +2,36 @@ const Comment = require('../models/comment');
 const Post = require('../models/post');
 
 
-module.exports.create = function(req,res){
-
-    Post.findById(req.body.post, function(err,post){
+module.exports.create = async function(req,res){
+    try {
+        let post = await Post.findById(req.body.post);
         if(post){
-            Comment.create({
+
+            let comment= await Comment.create({
                 content: req.body.content,
                 post: req.body.post,
                 user: req.user._id
-            }, function(err,comment){
-                if(err){console.log('error in creating comment')
-                }
+            });
                 post.comments.push(comment);
-                post.save();
-                res.redirect('/');
-                                     });
-            
+                post.save();    
         }
-    });
+        return res.redirect('back');
+    } catch (err) {
+        console.log('error in creating comment');
+        return;
+    }
+    
+    }
 
-}
 
-
-module.exports.destroy = function(req,res){
-    Comment.findById(req.params.id,function(err,comment){
+module.exports.destroy = async function(req,res){
+    let comment= await Comment.findById(req.params.id);
         //.id means converting the object id into string
-        Post.findById(comment.post,function(err,post){
+    let post= await Post.findById(comment.post);
 
-            if(comment.user == req.user.id||post.user==req.user.id){ 
-               comment.remove();
-               Post.findByIdAndUpdate(post,{ $pull: {comments: req.param.id}},function(err,post){
-                   
-               })
-           }
-        });
-});
-
-
-return res.redirect('back');
-
+    if(comment.user == req.user.id||post.user==req.user.id){ 
+        comment.remove();
+        await Post.findByIdAndUpdate(post,{ $pull: {comments: req.param.id}});
+    }
+    return res.redirect('back');
 }
