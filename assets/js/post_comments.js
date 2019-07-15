@@ -11,12 +11,12 @@
                 url: '/comments/create',
                 data: newCommentForm.serializeArray(),
                 success: function(data){
+                    console.log(data.data.comment);
+                    let newComment= newCommentDom(data.data.comment);
+                    
 
-                    let newComment= newCommentDom(data.da
-                        ta.comment);
-                    $('post-comments-list>ul').prepend(newComment);
+                    $(`#post-comments${data.data.comment.post}>ul`).prepend(newComment);
                     // deletePost($(' .delete-post-button',newComment));
-                    console.log(comment);
                 }, error: function(error){
                     console.log(error.responseText);
                 }
@@ -27,22 +27,22 @@
 
     let newCommentDom = function(comment){
         return $(`
-        <section>
+        <section id="comment-list-${comment.post}">
                 <li>
                     <p>
                         ${comment.content}
                                                 <br>
                             <small>
-                                ${comment.user.name}
+                                ${comment.user}
                             </small>
         
         
-                            <a href="/comments/destroy/${comment.id}">x</a>
+                            <a href="/comments/destroy/${comment._id}">x</a>
         
                             
                     </p>
                 </li>
-        </section>`)
+        </section>`);
     };
 
 

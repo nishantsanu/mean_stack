@@ -32,6 +32,10 @@ app.use(express.static('./assets/'));
 //use express layout
 app.use(expressLayouts);
 
+//for multer upload make the upload path available to browser
+
+app.use('/uploads',express.static(__dirname +'/uploads'));
+
 //extract style and script from subpages
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);

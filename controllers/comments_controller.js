@@ -14,19 +14,19 @@ module.exports.create = async function(req,res){
             });
                 post.comments.push(comment);
                 post.save();    
-            // console.log(comment + 'hogya');
+            //  console.log(comment + 'hogya');
 
                 if(req.xhr){
                     return res.status(200).json({
                         data: {
-                            comment: comment
+                            comment: comment,
                         },
                         message: "Comment created!"
                     });
                 }
         }
 
-
+        console.log('created comment');
       
         return res.redirect('back');
     } catch (err) {

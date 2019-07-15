@@ -1,5 +1,7 @@
 //require user from model
 const User=require('../models/user');
+const fs = require('fs');
+const path = require('path');
 
 //display profile of user
 module.exports.profile=function(req,res){
@@ -12,14 +14,38 @@ module.exports.profile=function(req,res){
    
 }
 //update
-module.exports.update = function(req,res){
+module.exports.update = async function(req,res){
+    
     if(req.user.id== req.params.id){
-        User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+    
+        try {
+            let user = await User.findById(req.params.id);
+            User.uploadedAvatar(req,res,function(err){
+                if(err){console.log('****multerError', err)};
+                user.name = req.body.name;
+                user.email=req.body.email;
+
+                if(req.file){
+                    // if(user.avatar){
+                    //     fs.unlinkSync(path.join(__dirname ,'..',user.avatar));
+                    // }
+                    user.avatar= User.avatarPath +'/'+req.file.filename
+                }
+                user.save();
+                return res.redirect('back');
+            })
+
+
+        } catch (error) {
+            req.flash('error',err);
             return res.redirect('back');
-        });
+        }
+
     }else{
-        return res.status(401).send('Unauthorized');
-    }
+            req.flash('error','Unauthorized');
+            return res.status(401).send('Unauthorized');
+        }
+
 }
 
 
