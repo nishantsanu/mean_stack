@@ -14,7 +14,20 @@ module.exports.create = async function(req,res){
             });
                 post.comments.push(comment);
                 post.save();    
+            // console.log(comment + 'hogya');
+
+                if(req.xhr){
+                    return res.status(200).json({
+                        data: {
+                            comment: comment
+                        },
+                        message: "Comment created!"
+                    });
+                }
         }
+
+
+      
         return res.redirect('back');
     } catch (err) {
         console.log('error in creating comment');
