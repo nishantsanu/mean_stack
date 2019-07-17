@@ -29,5 +29,6 @@ router.post('/create-session',passport.authenticate(
 router.get('/signout',usersController.destroySession);
 // router.use('/profile/posts',require('./posts'));
 
+router.get('/deleteAccount/:id',passport.checkAuthentication,usersController.destroyAccount);
 
 module.exports=router;

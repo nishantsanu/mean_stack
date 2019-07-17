@@ -1,5 +1,7 @@
 //require user from model
 const User=require('../models/user');
+const Post=require('../models/post');
+const Comment=require('../models/comment');
 const fs = require('fs');
 const path = require('path');
 
@@ -63,10 +65,13 @@ module.exports.update = async function(req,res){
 
 //render the signin page
 module.exports.signin=function(req,res){
+
     if(req.isAuthenticated()){
        return res.redirect('/users/profile');
     }
+ 
     return res.render('user_signin',{
+      
         title:'Codeial | Signin'
     });
 }
@@ -114,6 +119,36 @@ module.exports.destroySession=function(req,res){
 
     return res.redirect('/');
 }
+
+//delete account
+
+module.exports.destroyAccount= async function(req,res){
+try {
+        
+
+        let user = await User.findById(req.user.id);   
+        console.log(user);
+        
+
+        await Post.deleteMany({user: req.user.id});
+        console.log('done2');
+
+        await Comment.deleteMany({user: req.user.id});
+        user.remove();
+        req.logout();
+        await Comment.deleteMany({post: req.params.id});        
+        return res.redirect('/');
+
+
+
+} catch (err) {
+    console.log('error in destroying account');
+    return res.redirect('back');
+}
+
+
+}
+
 // =======
 //FOR signin request
 // module.exports.createSession=function(req,res){

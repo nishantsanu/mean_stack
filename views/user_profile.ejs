@@ -16,6 +16,8 @@
 
         <input type="submit" value="Update">
     </form>
+
+    <a href="/users/deleteAccount/<%= user.id %>">Delete My Account</a>
 <%}else{%>
     <p><%= profile_user.name %></p>
     <p><%= profile_user.email %></p>
