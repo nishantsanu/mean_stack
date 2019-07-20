@@ -16,6 +16,7 @@ const MongoStore=require('connect-mongo')(session);
 const sassMiddleware=require('node-sass-middleware');
 const flash= require('connect-flash');
 const customMiddleware= require('./config/middleware');
+const passportGoogle= require('./config/passport-google-oath2-strategy');
 
 
 app.use(sassMiddleware({

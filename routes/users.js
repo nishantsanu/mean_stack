@@ -31,4 +31,10 @@ router.get('/signout',usersController.destroySession);
 
 router.get('/deleteAccount/:id',passport.checkAuthentication,usersController.destroyAccount);
 
+router.get('/auth/google', passport.authenticate('google', {scope: ['profile','email']}));
+router.get('/auth/google/callback',passport.authenticate('google',{failureRedirect: '/users/signin'}),usersController.createSession);
+
+
+
+
 module.exports=router;
