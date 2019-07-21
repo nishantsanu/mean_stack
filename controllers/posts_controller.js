@@ -9,6 +9,8 @@ module.exports.create = async function(req,res){
             user:req.user._id,
         });
 //handle by ajax
+        post= await post.populate('user','name').execPopulate();
+        
         if(req.xhr){
             return res.status(200).json({
                 data: {

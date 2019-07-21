@@ -15,7 +15,25 @@
                     let newComment= newCommentDom(data.data.comment);
                     
 
-                    $(`#post-comments${data.data.comment.post}>ul`).prepend(newComment);
+                    $(`#post-comments${data.data.comment.post} ul`).prepend(
+                        `
+                     <li id="comment-list-${data.data.comment.post}" >
+                         <p>
+                             ${data.data.comment.content}
+                            <br>
+                                <small>
+                                ${data.data.comment.user.name}
+                                </small>
+                            
+                                
+
+                             <a href="/comments/destroy/${data.data.comment._id}">x</a>
+
+                                    
+                        </p>
+                    </li>
+                         `
+                    );
                     // deletePost($(' .delete-post-button',newComment));
                 }, error: function(error){
                     console.log(error.responseText);
@@ -26,23 +44,28 @@
     //method to create post in dom
 
     let newCommentDom = function(comment){
-        return $(`
-        <section id="comment-list-${comment.post}">
-                <li>
-                    <p>
-                        ${comment.content}
-                                                <br>
-                            <small>
-                                ${comment.user}
-                            </small>
+        // return $(
+        //     `
+        // <section id="comment-list-${comment.post}">
+        //         <li>
+        //             <p>
+        //                 ${comment.content}
+        //                                         <br>
+        //                     <small>
+        //                         ${comment.user.name}
+        //                     </small>
         
         
-                            <a href="/comments/destroy/${comment._id}">x</a>
+        //                     <a href="/comments/destroy/${comment._id}">x</a>
         
                             
-                    </p>
-                </li>
-        </section>`);
+        //             </p>
+        //         </li>
+        // </section>
+        // `
+        // );
+
+        return $();
     };
 
 
