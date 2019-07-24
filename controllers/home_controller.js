@@ -1,7 +1,7 @@
 const Post= require('../models/post');
 // const passport = require('passport');
 const User = require('../models/user');
-
+const Comment= require('../models/comment');
 
 // module.exports.home=function(req,res){
    
@@ -31,6 +31,7 @@ const User = require('../models/user');
 module.exports.home=  async function(req,res){
     //error handeling by try catch
     try{
+        
         let posts= await Post.find({})
         .sort('-createdAt')
         .populate('user')
@@ -41,6 +42,7 @@ module.exports.home=  async function(req,res){
             }
         });
         
+
         let users= await User.find({});
 
         return res.render('home',{
